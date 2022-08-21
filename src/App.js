@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
-import Movies from './Movies/Movies.js'
+import Header from './Components/Header.js';
+
+
+
+
 export default class App extends Component{
+  
   render(){
+    document.body.style.backgroundColor = "#2B2E43"
     return(
       <div>
-<Movies/>
+<Header/>
+<p>oi</p>
       </div>
     )
   }
