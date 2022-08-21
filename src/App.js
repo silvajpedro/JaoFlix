@@ -1,17 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from './Components/Header.js';
 
+export default class App extends Component {
 
-
-
-export default class App extends Component{
-  
-  render(){
+  render() {
     document.body.style.backgroundColor = "#2B2E43"
-    return(
+    return (
       <div>
-<Header/>
-<p>oi</p>
+        <Header />
       </div>
     )
   }
