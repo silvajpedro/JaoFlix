@@ -4,8 +4,9 @@ import Filmes from "./Filmes";
 import Series from "./series";
 import Alta from "./Alta"
 import Inicio from "./Inicio";
-import Logo from "../Images/JãoFlix3.png"
+import Logo from "../Images/semfundo.png"
 import { Li,Begin, ImagemHeader,Headerbox,UL,Links, } from "./Style";
+
 
 export default class Header extends Component {
     render() {
@@ -39,6 +40,7 @@ export default class Header extends Component {
                         </Routes>
                     </BrowserRouter>
                 </Headerbox>
+                
         )
     }
 }

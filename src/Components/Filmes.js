@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import Carousel from "nuka-carousel/lib/carousel";
-import {BoxFilm, FilmsImages} from "./Style.js"
+import * as S from "./Style"
 
 const FilmesApi = axios.create({
     baseURL: "https://api.themoviedb.org/3/movie/popular?api_key=3cb82dd81c0e63bdd11ee02aefb8bb83&language=pt-br&page=1"
@@ -40,8 +39,8 @@ export default class Movies extends Component {
         }
         return (
             <>
-                <BoxFilm>
-                    <Carousel defaultControlsConfig={{
+                <S.BoxFilm>
+                    <S.Carrosel defaultControlsConfig={{
                         nextButtonText: '>',
                         nextButtonStyle: {
                             display: 'flex',
@@ -75,23 +74,20 @@ export default class Movies extends Component {
 
                         {this.state.movies.splice(0, 7).map((item) => (
                             <>
-                                <ul>
-                                    {/* <li>{item.title}</li>
-                        <li>{item.overview}</li>
-                        <li>{item.vote_average}</li> */}
-                                </ul>
-                                <FilmsImages src={item.image} alt="poster" />
-                                {/* <FilmsImages className="imagem2" src={item.image2} alt="poster" /> */}
-
-                                {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
+                                <S.Teste>
+                                    <S.FilmsImages src={item.image} alt="poster" />
+                                    <S.Grown>
+                                        <p>{item.title}</p>
+                                        <a href="https://www.themoviedb.org/" target='_blank'><button>Assitir agora</button></a>
+                                    </S.Grown>
+                                </S.Teste>
                                 {/* {this.state.data.map((item) => (
                                 <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
-                            ))} */}
+                            ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
                             </>
-
                         ))}
-                    </Carousel>
-                    <Carousel defaultControlsConfig={{
+                    </S.Carrosel>
+                    <S.Carrosel defaultControlsConfig={{
                         nextButtonText: '>',
                         nextButtonStyle: {
                             display: 'flex',
@@ -123,19 +119,20 @@ export default class Movies extends Component {
                     }} style={Mover} speed={1000} autoplay={true} cellSpacing={0} cellAlign="center" wrapAround={true} slidesToShow={3} renderBottomCenterControls={false}>
                         {this.state.movies.splice(1, 7).map((item) => (
                             <>
-                                <ul>
-                                    {/* <li>{item.title}</li>
-                        <li>{item.overview}</li>
-                        <li>{item.vote_average}</li> */}
-                                </ul>
-                                <FilmsImages src={item.image} alt="poster" />
-                                {/* <FilmsImages className="imagem2" src={item.image2} alt="poster" /> */}
-
-                                {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
+                                <S.Teste>
+                                    <S.FilmsImages src={item.image} alt="poster" />
+                                    <S.Grown>
+                                        <p>{item.title}</p>
+                                        <a href="https://www.themoviedb.org/" target='_blank'><button>Assitir agora</button></a>
+                                    </S.Grown>
+                                </S.Teste>
+                                {/* {this.state.data.map((item) => (
+                                <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
+                            ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
                             </>
                         ))}
-                    </Carousel>
-                </BoxFilm>
+                    </S.Carrosel>
+                </S.BoxFilm>
             </>
         )
     }
