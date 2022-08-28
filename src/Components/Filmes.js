@@ -1,32 +1,73 @@
 import axios from "axios";
 import React, { Component } from "react";
 import * as S from "./Style"
-
+import icone from "../Images/pesquisa.png"
 const FilmesApi = axios.create({
-    baseURL: "https://api.themoviedb.org/3/movie/popular?api_key=3cb82dd81c0e63bdd11ee02aefb8bb83&language=pt-br&page=1"
+    baseURL: "https://api.themoviedb.org/3/movie/top_rated?api_key=3cb82dd81c0e63bdd11ee02aefb8bb83&language=pt-br&page=2"
 })
 
 export default class Movies extends Component {
     state = {
         movies: [],
+        FilterMovies: [],
+        troca: 0
     }
     componentDidMount() {
         this.getMovies()
     }
     getMovies = async () => {
         const resposta = await FilmesApi.get()
-        const AllFilmes = resposta.data.results.map((item) => {
+        const allFilmes = resposta.data.results.map((item) => {
             return {
                 ...item,
-                image: `https://image.tmdb.org/t/p/w300${item.poster_path}`,
-                image2: `https://image.tmdb.org/t/p/w500${item.backdrop_path}`
+                image: `https://image.tmdb.org/t/p/w500${item.poster_path}`
+            }
+
+        })
+        this.setState({
+            movies: allFilmes,
+
+        })
+        console.log(allFilmes)
+    }
+
+    handleChange = (event) => {
+        const ListaFiltrada = this.state.movies.filter((item) => {
+            if (event.target.value === "") {
+                return ""
+            } else if (item.original_title.toLowerCase().includes(event.target.value.toLowerCase())) {
+                return true
             }
         })
-        console.log(AllFilmes)
         this.setState({
-            movies: AllFilmes,
-            data: AllFilmes
+            FilterMovies: ListaFiltrada
         })
+        console.log(this.state.FilterMovies)
+    }
+    Esquerda = () => {
+        if (this.state.troca % 2 === 0) {
+            const search = document.querySelector('.searchbox')
+            const icone = document.querySelector('.procurar')
+            icone.style.transition = "ease-in-out 0.9s"
+            icone.style.right = "-37.5vw"
+            search.style.transition = "ease-in-out 0.9s"
+            search.style.visibility = "initial"
+            search.style.width = "20vw"
+            this.setState({
+                troca: this.state.troca += 1
+            })
+        } else {
+            const icone = document.querySelector('.procurar')
+            const search = document.querySelector('.searchbox')
+            icone.style.transition = "ease-in-out 0.8s"
+            icone.style.right = "-57.5vw"
+            search.style.transition = "ease-in-out 0.8s"
+            search.style.width = "0vw"
+            search.style.visibility = "hidden"
+            this.setState({
+                troca: this.state.troca += 1
+            })
+        }
     }
     render() {
         const Mover = {
@@ -39,6 +80,22 @@ export default class Movies extends Component {
         }
         return (
             <>
+                <img className="procurar" onClick={this.Esquerda} src={icone} alt="search icon" />
+                <div className="caixaDePesquisa">
+                    <input onChange={this.handleChange} className="searchbox" type="text" />
+                </div>
+                <div >
+                    {this.state.FilterMovies.slice(0, 1).map((item, index) => (
+                        <S.SearchTeste key={index}>
+                            <S.SearchImages src={item.image} alt='posters' />
+                            <div>
+                             <p>{item.title}</p>
+                             <a href="https://www.themoviedb.org/" target='_blank'><button>Assitir agora</button></a>
+                            </div>
+                        </S.SearchTeste>
+                    ))}
+
+                </div>
                 <S.BoxFilm>
                     <S.Carrosel defaultControlsConfig={{
                         nextButtonText: '>',
@@ -72,7 +129,7 @@ export default class Movies extends Component {
                     }}
                         autoplay={true} speed={500} style={Mover} cellSpacing={0} cellAlign="center" wrapAround={true} slidesToShow={3} renderBottomCenterControls={false}>
 
-                        {this.state.movies.splice(0, 7).map((item) => (
+                        {this.state.movies.slice(0, 10).map((item) => (
                             <>
                                 <S.Teste>
                                     <S.FilmsImages src={item.image} alt="poster" />
@@ -82,8 +139,8 @@ export default class Movies extends Component {
                                     </S.Grown>
                                 </S.Teste>
                                 {/* {this.state.data.map((item) => (
-                                <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
-                            ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
+                                    <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
+                                    ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
                             </>
                         ))}
                     </S.Carrosel>
@@ -117,7 +174,7 @@ export default class Movies extends Component {
                             height: '8vh'
                         }
                     }} style={Mover} speed={1000} autoplay={true} cellSpacing={0} cellAlign="center" wrapAround={true} slidesToShow={3} renderBottomCenterControls={false}>
-                        {this.state.movies.splice(1, 7).map((item) => (
+                        {this.state.movies.slice(5).map((item) => (
                             <>
                                 <S.Teste>
                                     <S.FilmsImages src={item.image} alt="poster" />
@@ -127,8 +184,8 @@ export default class Movies extends Component {
                                     </S.Grown>
                                 </S.Teste>
                                 {/* {this.state.data.map((item) => (
-                                <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
-                            ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
+                                    <p>{item.release_date.replace(/-/g, " ").split(" ").reverse().splice(2, 3)}</p>
+                                    ))} */}  {/* replace(/-/g, " ").split(" ").reverse().join("/") */}
                             </>
                         ))}
                     </S.Carrosel>

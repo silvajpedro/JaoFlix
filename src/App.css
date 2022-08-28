@@ -1,6 +1,38 @@
 body{
-    background-color: rgb(0, 0, 0);
+    background-color: #2C2B2A;
+}
+.caixaDePesquisa{
+    position: relative;
+    top: -17vh;
+    right: -45vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30vw;
+    height: 8vh;
 }
 input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    height: 6.8vh;
+    width: 0vw;
+    visibility: hidden;
+    border-radius:30px ;
+    border: solid;
+    font-size: 20px;
+    background-color: white;
+    padding-left: 60px;
+}
+input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+.procurar{
+    position: relative;
+    top: -9vh;
+    right: -57vw;
+    width: 3.7vw;
+    z-index: 1;
 }
