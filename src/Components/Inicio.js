@@ -81,7 +81,7 @@ export default class Inicio extends Component {
             <div className="caixaDePesquisa">
                 <input onChange={this.handleChange} className="searchbox" type="text"/>
             </div>
-            <div className="filmesBox">
+        
             {this.state.FilterMovies.slice(0, 1).map((item, index) => (
                         <S.SearchTeste key={index}>
                             <S.SearchImages src={item.image} alt='posters' />
@@ -92,7 +92,6 @@ export default class Inicio extends Component {
                         </S.SearchTeste>
                     ))}
     
-            </div>
             <S.BoxFilm>
                     <S.Carrosel defaultControlsConfig={{
                         nextButtonText: '>',
