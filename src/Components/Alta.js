@@ -171,7 +171,7 @@ export default class Inicio extends Component {
                             height: '8vh'
                         }
                     }} style={Mover} speed={1000} autoplay={true} cellSpacing={0} cellAlign="center" wrapAround={true} slidesToShow={3} renderBottomCenterControls={false}>
-                        {this.state.movies.slice(5).map((item) => (
+                        {this.state.movies.slice(10).map((item) => (
                             <>
                                 <S.Teste>
                                     <S.FilmsImages src={item.image} alt="poster" />
